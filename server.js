@@ -12,6 +12,18 @@ app.use(cors());
 
 const appData = [];
 
+// Set POST route/endpoint
+app.post('/api/cocktails', (req, res) => {
+    console.log('I got a request!');
+    const data = req.body.drinks;
+    appData.push(data);
+    console.log(appData);
+    res.json({
+        status: 'success',
+        cocktails: data
+    })
+})
+
 // Init the main project folder
 app.use(express.static('public'));
 

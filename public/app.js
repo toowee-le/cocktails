@@ -25,6 +25,9 @@ const getCocktails = async (baseURL, ingredient) => {
             },
             body: JSON.stringify(postData)
         };
+        const response = await fetch('/api/cocktails', options);
+        const getData = await response.json();
+        console.log(getData);
     } catch (error) {
         console.log("error", error);
     }
