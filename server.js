@@ -1,5 +1,7 @@
 // Express to run server and routes
 const express = require('express');
+const Datastore = require('nedb');
+
 const app = express();
 
 /* Dependencies */
@@ -10,7 +12,8 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
-const appData = [];
+const appData = new Datastore('database.db');
+appData.loadDatabase();
 
 // Set POST route/endpoint
 app.post('/api/cocktails', (req, res) => {
