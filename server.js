@@ -20,7 +20,6 @@ app.post('/api/cocktails', (req, res) => {
     console.log('I got a request!');
     const data = req.body.drinks;
     appData.insert(data);
-    console.log(appData);
     res.json({
         status: 'success',
         cocktails: data
