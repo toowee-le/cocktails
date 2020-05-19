@@ -15,10 +15,17 @@ app.use(cors());
 const appData = new Datastore('database.db');
 appData.loadDatabase();
 
+// Create GET route
+app.get('/api', (req, res) => {
+    res.json({ test: 123 })
+})
+
 // Set POST route/endpoint
 app.post('/api/cocktails', (req, res) => {
     console.log('I got a request!');
-    const data = req.body.drinks;
+    const data = req.body;
+    const timestamp = Date.now();
+    data.timestamp = timestamp;
     appData.insert(data);
     res.json({
         status: 'success',
