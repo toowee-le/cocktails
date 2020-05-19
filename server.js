@@ -19,7 +19,7 @@ appData.loadDatabase();
 app.post('/api/cocktails', (req, res) => {
     console.log('I got a request!');
     const data = req.body.drinks;
-    appData.push(data);
+    appData.insert(data);
     console.log(appData);
     res.json({
         status: 'success',
