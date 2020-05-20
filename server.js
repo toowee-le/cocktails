@@ -17,20 +17,23 @@ appData.loadDatabase();
 
 // Create GET route
 app.get('/api', (req, res) => {
-    res.json({ test: 123 })
-})
+    appData.find({}, (err, data) => {
+        if (err) {
+            res.end();
+            return;
+        }
+        res.json(data);
+    })
+});
 
 // Set POST route/endpoint
 app.post('/api/cocktails', (req, res) => {
     console.log('I got a request!');
-    const data = req.body;
+    const data = req.body.drinks;
     const timestamp = Date.now();
     data.timestamp = timestamp;
     appData.insert(data);
-    res.json({
-        status: 'success',
-        cocktails: data
-    })
+    res.json(data);
 })
 
 // Init the main project folder
