@@ -1,3 +1,4 @@
+const cocktailContainer = document.getElementById('cocktailContainer');
 let baseURL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 
 document.getElementById('search').addEventListener('click', performAction);
@@ -35,5 +36,22 @@ const fetchCocktail = async (baseURL, ingredient) => {
 const updateUI = async () => {
     const res = await fetch('/api');
     const data = await res.json();
-    console.log(data);
+
+    for (drink of data) {
+        const cocktailCard = document.createElement('div');
+        cocktailCard.classList.add('cocktail-card');
+
+        const cocktail = drink.strDrink;
+        const imgURL = drink.strDrinkThumb;
+
+        const cardInnerHTML = `
+            <img src="${imgURL}/preview" alt="Cocktail Thumbnail" class="cocktail-img">
+            <h3>${cocktail}</h3>
+        `;
+
+        cocktailCard.innerHTML = cardInnerHTML;
+
+        cocktailContainer.appendChild(cocktailCard);
+    }
+    
 }
