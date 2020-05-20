@@ -7,7 +7,6 @@ function performAction(e) {
     e.preventDefault();
     const ingredient = document.getElementById('ingredient').value;
     fetchCocktail(baseURL, ingredient);
-    updateUI();
 }
 
 // Fetch Cocktail API data and send to the server
@@ -16,6 +15,11 @@ const fetchCocktail = async (baseURL, ingredient) => {
     try {
         const data = await res.json();
         const drinks = data.drinks;
+
+        for (drink of drinks) {
+            createCocktailCard();
+        }
+
         const postData = { drinks };
         const options = {
             method: 'POST',
@@ -33,25 +37,19 @@ const fetchCocktail = async (baseURL, ingredient) => {
     }
 }
 
-const updateUI = async () => {
-    const res = await fetch('/api');
-    const data = await res.json();
+function createCocktailCard() {
+    const cocktailCard = document.createElement('div');
+    cocktailCard.classList.add('cocktail-card');
 
-    for (drink of data) {
-        const cocktailCard = document.createElement('div');
-        cocktailCard.classList.add('cocktail-card');
+    const cocktail = drink.strDrink;
+    const imgURL = drink.strDrinkThumb;
 
-        const cocktail = drink.strDrink;
-        const imgURL = drink.strDrinkThumb;
+    const cardInnerHTML = `
+        <img src="${imgURL}/preview" alt="Cocktail Thumbnail" class="cocktail-img">
+        <h3>${cocktail}</h3>
+    `;
 
-        const cardInnerHTML = `
-            <img src="${imgURL}/preview" alt="Cocktail Thumbnail" class="cocktail-img">
-            <h3>${cocktail}</h3>
-        `;
+    cocktailCard.innerHTML = cardInnerHTML;
 
-        cocktailCard.innerHTML = cardInnerHTML;
-
-        cocktailContainer.appendChild(cocktailCard);
-    }
-    
+    cocktailContainer.appendChild(cocktailCard);
 }
