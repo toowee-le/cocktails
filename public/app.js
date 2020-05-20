@@ -12,7 +12,13 @@ function performAction(e) {
     } else {
         const ingredient = document.getElementById('ingredient').value;
         fetchCocktail(baseURL, ingredient);
+        resetForm();
     }
+}
+
+function resetForm() {
+    const form = document.forms["search"];
+    form.reset();
 }
 
 // Fetch Cocktail API data and send to the server
