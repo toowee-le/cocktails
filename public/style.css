@@ -24,9 +24,17 @@ h2 {
     letter-spacing: 1px;
 }
 
+h2 {
+    text-align: left;
+    font-size: 1.3rem;
+    padding: 1em 0;
+}
+
 h3 {
-    padding-bottom: .5em;
-    font-size: 1rem;
+    font-size: .9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 1em 0 0;
 }
 
 /* ---- Layout ---- */
@@ -57,4 +65,44 @@ input[type=submit] {
 
 input[type=submit]:hover {
     background: #d0dfbe;
+}
+
+/* Cocktail Container */
+.app {
+    width: 70%;
+    max-width: 500px;
+    margin: 30px auto 0;
+    padding: 1em;
+    border-radius: 10px;
+    background: rgba(235,235,235,0.7);
+    text-align: center;
+}
+
+.cocktail-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1em;
+    justify-items: center;
+}
+
+.cocktail-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 5px;
+    padding: 1em .5em;
+    width: 225px;
+    background: #FFF;
+    -webkit-box-shadow: -2px 2px 10px 0px rgba(204,204,204,1);
+    -moz-box-shadow: -2px 2px 10px 0px rgba(204,204,204,1);
+    box-shadow: -2px 2px 10px 0px rgba(204,204,204,1);
+}
+
+.cocktail-img {
+    border-radius: 5px;
+    width: 200px;
+    -webkit-box-shadow: -2px 2px 10px 0px rgba(204,204,204,1);
+    -moz-box-shadow: -2px 2px 10px 0px rgba(204,204,204,1);
+    box-shadow: -2px 2px 10px 0px rgba(204,204,204,1);
 }
