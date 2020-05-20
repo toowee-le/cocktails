@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --text-color: #FFF;
+}
+
+body {
+    background: url(img/background.jpg);
+    background-size: cover;
+    color: var(--text-color);
+}
