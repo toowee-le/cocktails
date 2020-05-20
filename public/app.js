@@ -5,17 +5,16 @@ document.getElementById('search').addEventListener('click', performAction);
 function performAction(e) {
     e.preventDefault();
     const ingredient = document.getElementById('ingredient').value;
-    getCocktails(baseURL, ingredient);
+    fetchCocktail(baseURL, ingredient);
+    updateUI();
 }
 
-
-const getCocktails = async (baseURL, ingredient) => {
-    // Fetch data from Cocktail API
+// Fetch Cocktail API data and send to the server
+const fetchCocktail = async (baseURL, ingredient) => {
     const res = await fetch(baseURL+ingredient)
     try {
         const data = await res.json();
         const drinks = data.drinks;
-        console.log(drinks);
         const postData = { drinks };
         const options = {
             method: 'POST',
@@ -31,4 +30,10 @@ const getCocktails = async (baseURL, ingredient) => {
     } catch (error) {
         console.log("error", error);
     }
+}
+
+const updateUI = async () => {
+    const res = await fetch('/api');
+    const data = await res.json();
+    console.log(data);
 }
