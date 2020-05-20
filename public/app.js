@@ -5,8 +5,14 @@ document.getElementById('search').addEventListener('click', performAction);
 
 function performAction(e) {
     e.preventDefault();
-    const ingredient = document.getElementById('ingredient').value;
-    fetchCocktail(baseURL, ingredient);
+    const form = document.forms["search"]["ingredient"].value;
+    if (form == "") {
+        alert("Please enter an ingredient.");
+        return false;
+    } else {
+        const ingredient = document.getElementById('ingredient').value;
+        fetchCocktail(baseURL, ingredient);
+    }
 }
 
 // Fetch Cocktail API data and send to the server
