@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display&display=swap');
 
 * {
     box-sizing: border-box;
@@ -14,11 +14,17 @@ body {
     background: #fcfcfc url(img/background.jpg) no-repeat;
     background-size: cover;
     color: var(--text-color);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 
+/* ---- Typography ---- */
 h1,
-h2,
-h3 {
+h2 {
     font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+}
+
+h3 {
+    padding-bottom: .5em;
+    font-size: 1rem;
 }
