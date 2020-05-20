@@ -28,3 +28,33 @@ h3 {
     padding-bottom: .5em;
     font-size: 1rem;
 }
+
+/* ---- Layout ---- */
+form {
+    display: flex;
+    justify-content: space-around;
+}
+
+input[type=text],
+input[type=submit] {
+    margin: 1.5em 0 1em;
+    padding: 1em;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: #FFF;
+}
+
+input[type=text] {
+    width: 90%;
+}
+
+input[type=submit] {
+    width: 8%;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+input[type=submit]:hover {
+    background: #d0dfbe;
+}
