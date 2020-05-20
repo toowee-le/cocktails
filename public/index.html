@@ -6,17 +6,40 @@
     <title>Cocktail Recipes</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/f97e9a7da6.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Cocktail Recipe App</h1>
-    <form action="">
-        <label for="ingredient">Enter a cocktail ingredient:</label>
-        <input type="text" id="ingredient" name="ingredient"></br>
-        <input type="submit" id="search" value="Search">
-    </form>
-    <h2>Results:</h2>
-    <ul class="cocktail-list"></ul>
-    
+    <main class="app">
+        <h1>Cocktail Recipes</h1>
+
+        <form name="search" action="POST">
+            <input type="text" id="ingredient" name="ingredient" placeholder="Search ingredient"></br>
+            <input type="submit" id="search" value="&#xF002;" style="font-family: Arial, FontAwesome" alt="Search" title="Search">
+        </form>
+
+        <h2>Cocktails:</h2>
+        <div class="cocktail-container" id="cocktailContainer">
+            <div class="cocktail-card">
+                <h3>Long Island Iced Tea</h3>
+                <img src="https://www.thecocktaildb.com/images/media/drink/ywxwqs1461867097.jpg/preview" alt="" srcset="">
+            </div>
+            <div class="cocktail-card">
+                <h3>Cosmopolitan</h3>
+                <img src="https://www.thecocktaildb.com/images/media/drink/clth721504373134.jpg/preview" alt="" srcset="">
+            </div>
+            <div class="cocktail-card">
+                <h3>Gin & Tonic</h3>
+                <img src="https://www.thecocktaildb.com/images/media/drink/clth721504373134.jpg/preview" alt="" srcset="">
+            </div>
+            <div class="cocktail-card">
+                <h3>Cosmopolitan</h3>
+                <img src="https://www.thecocktaildb.com/images/media/drink/clth721504373134.jpg/preview" alt="" srcset="">
+            </div>
+        </div>
+        
+    </main>
+        
     <script src="app.js"></script>
 </body>
 </html>
