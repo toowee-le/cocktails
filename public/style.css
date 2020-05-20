@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,11 +7,18 @@
 }
 
 :root {
-    --text-color: #FFF;
+    --text-color: #151713;
 }
 
 body {
-    background: url(img/background.jpg);
+    background: #fcfcfc url(img/background.jpg) no-repeat;
     background-size: cover;
     color: var(--text-color);
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Playfair Display', serif;
 }
