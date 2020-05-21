@@ -11,7 +11,7 @@ function performAction(e) {
         return false;
     } else {
         const ingredient = document.getElementById('ingredient').value;
-        fetchCocktail(baseURL, ingredient);
+        getCocktail(baseURL, ingredient);
         resetForm();
     }
 }
@@ -22,16 +22,14 @@ function resetForm() {
 }
 
 // Fetch Cocktail API data and send to the server
-const fetchCocktail = async (baseURL, ingredient) => {
-    const res = await fetch(baseURL+ingredient)
+const getCocktail = async (baseURL, ingredient) => {
+    const response = await fetch(baseURL+ingredient);
+    const data = await response.json();
+    const drinks = data.drinks;
     try {
-        const data = await res.json();
-        const drinks = data.drinks;
-
         for (drink of drinks) {
             createCocktailCard();
         }
-
         const postData = { drinks };
         const options = {
             method: 'POST',
@@ -52,10 +50,8 @@ const fetchCocktail = async (baseURL, ingredient) => {
 function createCocktailCard() {
     const cocktailCard = document.createElement('div');
     cocktailCard.classList.add('cocktail-card');
-
     const cocktail = drink.strDrink;
     const imgURL = drink.strDrinkThumb;
-
     const cardInnerHTML = `
         <img src="${imgURL}/preview" alt="Cocktail Thumbnail" class="cocktail-img">
         <h3>${cocktail}</h3>
