@@ -36,7 +36,7 @@ h3 {
     font-size: .9rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 1em 0 0;
+    padding: 1em 0;
 }
 
 /* ---- Layout ---- */
@@ -69,13 +69,13 @@ input[type=submit]:hover {
     background: var(--hover-color);
 }
 
-/* Filter Buttons */
 .filter-container {
     display: flex;
     justify-content: space-evenly;
     margin: 1em 0;
 }
 
+/* Buttons */
 .alcohol,
 .non-alcohol,
 .random-drink {
@@ -103,6 +103,36 @@ input[type=submit]:hover {
 .random-drink__icon {
     height: 25px;
     padding-right: 1em;
+}
+
+.buttons {
+    display: flex;
+}
+
+.get-recipe__btn,
+.favourite__btn {
+    background: #d0dfbe;
+    padding: 1em 1.7em;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: .3s ease;
+}
+
+.favourite__btn {
+    padding: 1em 1.3em;
+    margin-left: .8em;
+}
+
+.get-recipe__btn a,
+.favourite__btn a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.get-recipe__btn:hover,
+.favourite__btn:hover {
+    background: var(--hover-color);
 }
 
 /* Cocktail Container */
