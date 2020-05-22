@@ -1,5 +1,5 @@
 const cocktailContainer = document.getElementById('cocktailContainer');
-let baseURL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
+const baseURL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 
 document.getElementById('search').addEventListener('click', performAction);
 
@@ -56,9 +56,9 @@ function createCocktailCard() {
         <img src="${imgURL}/preview" alt="Cocktail Thumbnail" class="cocktail-img">
         <h3>${cocktail}</h3>
         <div class="buttons">
-            <button class="get-recipe__btn"><a href="">See Recipe</a></button> <button class="favourite__btn"><a href=""><i class="far fa-heart"></i></a></button>
+            <button class="get-recipe__btn"><a href="">See Recipe</a></button>
+            <button class="favourite__btn"><a href=""><i class="far fa-heart"></i></a></button>
         </div>
-        
     `;
 
     cocktailCard.innerHTML = cardInnerHTML;
