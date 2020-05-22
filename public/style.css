@@ -8,6 +8,7 @@
 
 :root {
     --text-color: #151713;
+    --hover-color: #E79A5B;
 }
 
 body {
@@ -65,7 +66,44 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background: #d0dfbe;
+    background: var(--hover-color);
+}
+
+/* Filter Buttons */
+.filter-container {
+    display: flex;
+    justify-content: flex-start;
+    margin: 1em 0;
+}
+
+.alcohol,
+.non-alcohol,
+.random-drink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 1.3em;
+    margin-right: 1.5em;
+    width: 130px;
+    background: #FFF;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: .3s ease;
+    cursor: pointer;
+}
+
+.alcohol:hover,
+.non-alcohol:hover,
+.random-drink:hover {
+    background: var(--hover-color);
+}
+
+.alcohol__icon,
+.non-alcohol__icon,
+.random-drink__icon {
+    height: 25px;
+    padding-right: 1em;
 }
 
 /* Cocktail Container */
