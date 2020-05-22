@@ -12,19 +12,21 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
-const appData = new Datastore('database.db');
-appData.loadDatabase();
+// const appData = new Datastore('database.db');
+// appData.loadDatabase();
+
+const appData = [];
 
 // Create GET route
-app.get('/api', (req, res) => {
-    appData.find({}, (err, data) => {
-        if (err) {
-            res.end();
-            return;
-        }
-        res.json(data);
-    })
-});
+// app.get('/api', (req, res) => {
+//     appData.find({}, (err, data) => {
+//         if (err) {
+//             res.end();
+//             return;
+//         }
+//         res.json(data);
+//     })
+// });
 
 // Set POST route/endpoint
 app.post('/api/cocktails', (req, res) => {
@@ -32,7 +34,9 @@ app.post('/api/cocktails', (req, res) => {
     const data = req.body.drinks;
     const timestamp = Date.now();
     data.timestamp = timestamp;
-    appData.insert(data);
+    //appData.insert(data);
+    appData.push(data);
+    console.log(appData);
     res.json(data);
 })
 
