@@ -1,8 +1,16 @@
 const baseURL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const recipeURL = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+const cocktailContainer = document.getElementById('cocktailContainer');
 
+function eventListeners() {
+    document.getElementById('search').addEventListener('click', performAction);
 
-document.getElementById('search').addEventListener('click', performAction);
+    if(cocktailContainer) {
+        cocktailContainer.addEventListener('click', eventDelegation);
+    }
+}
+
+eventListeners();
 
 function performAction(e) {
     e.preventDefault();
@@ -23,20 +31,23 @@ function performAction(e) {
     }
 }
 
-// Fetch cocktail data by ingredient from The CocktailDB API
+function eventDelegation(e) {
+    e.preventDefault();
+
+    if(e.target.id == 'getRecipe') {
+        getRecipe(e.target.dataset.id)
+        .then(recipe => console.log(recipe))
+    }
+}
+
+// Fetch cocktail by ingredient from The CocktailDB API
 const getCocktail = async (ingredient) => {
     let ingredientResponse = await fetch(baseURL+ingredient);
     let ingredientData = await ingredientResponse.json();
-    let drinks = ingredientData.drinks;
-    let id = drinks[0].idDrink;
-    let recipeResponse = await fetch(recipeURL+id);
-    let recipeData = await recipeResponse.json();
-    let recipes = recipeData.drinks;
+    let drink = ingredientData.drinks;
     try {
         return {
-            drinks: drinks,
-            id: id,
-            recipes: recipes
+            drinks: drink
         }
     } catch (error) {
         console.log(`No ingredients found for ${ingredient}`)
@@ -44,9 +55,20 @@ const getCocktail = async (ingredient) => {
     }
 }
 
-
-
-
+// Fetch single recipe from The CocktailDB API
+const getRecipe = async (id) => {
+    let recipeResponse = await fetch (recipeURL+id);
+    let recipeData = await recipeResponse.json();
+    let instruction = recipeData.drinks[0].strInstructions;
+    try {
+        return {
+            instructions: instruction
+        }
+    } catch (error) {
+        console.log(`No recipe found for ${id}`)
+        console.log("Error:", error)
+    }
+}
 
 // const getCocktail = async (baseURL, ingredient) => {
 //     const response = await fetch(baseURL+ingredient);
@@ -75,10 +97,8 @@ const getCocktail = async (ingredient) => {
 //     }
 // }
 
-
 // Update UI
 function createCocktailCard() {
-    const cocktailContainer = document.getElementById('cocktailContainer');
     const cocktailCard = document.createElement('div');
     cocktailCard.classList.add('cocktail-card');
     const cocktail = drink.strDrink;
@@ -86,14 +106,13 @@ function createCocktailCard() {
     const cardInnerHTML = `
         <img src="${imgURL}/preview" alt="Cocktail Thumbnail" class="cocktail-img">
         <h3>${cocktail}</h3>
-        <div class="buttons">
-            <button class="get-recipe__btn" id="getRecipe" data-id="${drink.idDrink}"><a href="">See Recipe</a></button>
+        <div class="btn-container">
+            <button class="get-recipe__btn" type="button" id="getRecipe" data-id="${drink.idDrink}"><a href="">See Recipe</a></button>
             <button class="favourite__btn" data-id="${drink.idDrink}"><a href=""><i class="far fa-heart"></i></a></button>
         </div>
     `;
 
     cocktailCard.innerHTML = cardInnerHTML;
-
     cocktailContainer.appendChild(cocktailCard);
 }
 
