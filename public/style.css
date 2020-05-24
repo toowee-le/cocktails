@@ -112,11 +112,13 @@ input[type=submit]:hover {
 .get-recipe__btn,
 .favourite__btn {
     background: #d0dfbe;
+    color: var(--text-color);
     padding: 1em 1.7em;
     outline: none;
     border: none;
     border-radius: 5px;
     transition: .3s ease;
+    cursor: pointer;
 }
 
 .get-recipe__btn > * {
@@ -126,12 +128,6 @@ input[type=submit]:hover {
 .favourite__btn {
     padding: 1em 1.3em;
     margin-left: .8em;
-}
-
-.get-recipe__btn a,
-.favourite__btn a {
-    color: var(--text-color);
-    text-decoration: none;
 }
 
 .get-recipe__btn:hover,

@@ -108,8 +108,8 @@ function createCocktailCard() {
         <img src="${imgURL}/preview" alt="Cocktail Thumbnail" class="cocktail-img">
         <h3>${cocktail}</h3>
         <div class="btn-container">
-            <button class="get-recipe__btn" type="button" id="getRecipe" data-id="${drink.idDrink}"><a href="">See Recipe</a></button>
-            <button class="favourite__btn" data-id="${drink.idDrink}"><a href=""><i class="far fa-heart"></i></a></button>
+            <button class="get-recipe__btn" id="getRecipe" data-id="${drink.idDrink}">See Recipe</button>
+            <button class="favourite__btn" data-id="${drink.idDrink}"><i class="far fa-heart"></i></button>
         </div>
     `;
 
