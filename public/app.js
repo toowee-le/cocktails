@@ -27,7 +27,6 @@ function performAction(e) {
                 createCocktailCard();
             }
         })
-        resetForm();
         clearResults();
     }
 }
@@ -118,11 +117,8 @@ function createCocktailCard() {
     cocktailContainer.appendChild(cocktailCard);
 }
 
-function resetForm() {
+function clearResults() {
     const form = document.forms["search"];
     form.reset();
-}
-
-function clearResults() {
     cocktailContainer.innerHTML = '';
 }
