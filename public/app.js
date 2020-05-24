@@ -28,6 +28,7 @@ function performAction(e) {
             }
         })
         resetForm();
+        clearResults();
     }
 }
 
@@ -60,6 +61,7 @@ const getRecipe = async (id) => {
     let recipeResponse = await fetch (recipeURL+id);
     let recipeData = await recipeResponse.json();
     let instruction = recipeData.drinks[0].strInstructions;
+    console.log(recipeData);
     try {
         return {
             instructions: instruction
@@ -119,4 +121,8 @@ function createCocktailCard() {
 function resetForm() {
     const form = document.forms["search"];
     form.reset();
+}
+
+function clearResults() {
+    cocktailContainer.innerHTML = '';
 }
