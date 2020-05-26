@@ -147,6 +147,12 @@ input[type=submit]:hover {
     line-height: 2;
     visibility: hidden;
     opacity: 0;
+    transition: visibility 0s opacity 0.5s;
+}
+
+.modal--active {
+    visibility: visible;
+    opacity: 1;
 }
 
 .modal__img {
