@@ -1,14 +1,7 @@
 const baseURL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const recipeURL = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 const cocktailContainer = document.getElementById('cocktailContainer');
-
-function eventListeners() {
-    document.getElementById('search').addEventListener('click', performAction);
-
-    if(cocktailContainer) {
-        cocktailContainer.addEventListener('click', eventDelegation);
-    }
-}
+const modal = document.getElementById('modal');
 
 eventListeners();
 
@@ -36,7 +29,9 @@ function eventDelegation(e) {
 
     if(e.target.id == 'getRecipe') {
         getRecipe(e.target.dataset.id)
-        .then(recipe => console.log(recipe))
+        .then(recipe => {
+            displayRecipe(recipe.recipe[0].strInstructions)
+        })
     }
 }
 
@@ -59,11 +54,10 @@ const getCocktail = async (ingredient) => {
 const getRecipe = async (id) => {
     let recipeResponse = await fetch (recipeURL+id);
     let recipeData = await recipeResponse.json();
-    let instruction = recipeData.drinks[0].strInstructions;
-    console.log(recipeData);
+    let recipes = recipeData.drinks;
     try {
         return {
-            instructions: instruction
+            recipe: recipes
         }
     } catch (error) {
         console.log(`No recipe found for ${id}`)
@@ -117,8 +111,29 @@ function createCocktailCard() {
     cocktailContainer.appendChild(cocktailCard);
 }
 
+function displayRecipe(recipe) {
+    modal.classList.add('modal--active');
+    const modalTitle = document.querySelector('.modal__header');
+    const ingredients = document.querySelector('.ingredient__list');
+    const preparation = document.createElement('p');
+}
+
 function clearResults() {
     const form = document.forms["search"];
     form.reset();
     cocktailContainer.innerHTML = '';
+}
+
+function clearModal() {
+    modal.classList.remove('modal--active');
+}
+
+function eventListeners() {
+    document.getElementById('search').addEventListener('click', performAction);
+
+    document.getElementById('modalClose').addEventListener('click', clearModal);
+
+    if(cocktailContainer) {
+        cocktailContainer.addEventListener('click', eventDelegation);
+    }
 }
