@@ -131,7 +131,7 @@ input[type=submit]:hover {
 }
 
 /* Modal */
-.modal__container {
+.modal {
     overflow: auto;
     position: fixed;
     top: 0;
@@ -145,7 +145,8 @@ input[type=submit]:hover {
     justify-content: center;
     align-items: center;
     line-height: 2;
-
+    visibility: hidden;
+    opacity: 0;
 }
 
 .modal__img {
