@@ -120,7 +120,7 @@ function displayIngredients(recipe) {
 
     for (let i = 1; i <= 15; i++) {
         let ingredientsObj = {};
-        if (recipe.recipe[0][`strIngredient${i}`] !== null || recipe.recipe[0][`strMeasure${i}`]) {
+        if (recipe.recipe[0][`strIngredient${i}`] !== null) {
             ingredientsObj.ingredient = recipe.recipe[0][`strIngredient${i}`];
             ingredientsObj.measure = recipe.recipe[0][`strMeasure${i}`];
 
@@ -141,6 +141,7 @@ function displayIngredients(recipe) {
 
 function displayRecipe(recipe) {
     modal.classList.add('modal--active');
+    document.body.style.overflowY = 'hidden';
     const modalTitle = document.querySelector('.modal__header');
     const modalPreparation = document.querySelector('.instructions');
     const modalImg = document.querySelector('.modal__img');
@@ -161,6 +162,7 @@ function clearResults() {
 
 function clearModal() {
     modal.classList.remove('modal--active');
+    document.body.style.overflowY = 'auto';
 }
 
 function eventListeners() {
