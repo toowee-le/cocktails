@@ -30,7 +30,8 @@ function eventDelegation(e) {
     if(e.target.id == 'getRecipe') {
         getRecipe(e.target.dataset.id)
         .then(recipe => {
-            displayRecipe(recipe.recipe[0].strInstructions)
+            displayRecipe(recipe);
+            displayIngredients(recipe);
         })
     }
 }
@@ -55,6 +56,9 @@ const getRecipe = async (id) => {
     let recipeResponse = await fetch (recipeURL+id);
     let recipeData = await recipeResponse.json();
     let recipes = recipeData.drinks;
+    //let object = recipeData.drinks[0]['strIngredient1']
+    console.log(recipeData);
+    //console.log(object);
     try {
         return {
             recipe: recipes
@@ -111,11 +115,42 @@ function createCocktailCard() {
     cocktailContainer.appendChild(cocktailCard);
 }
 
+function displayIngredients(recipe) {
+    let ingredients = [];
+
+    for (let i = 1; i <= 15; i++) {
+        let ingredientsObj = {};
+        if (recipe.recipe[0][`strIngredient${i}`] !== null || recipe.recipe[0][`strMeasure${i}`]) {
+            ingredientsObj.ingredient = recipe.recipe[0][`strIngredient${i}`];
+            ingredientsObj.measure = recipe.recipe[0][`strMeasure${i}`];
+
+            ingredients.push(ingredientsObj);
+        }
+    }
+
+    let htmlTemplate = '';
+
+    ingredients.forEach(ingredient => {
+        htmlTemplate+= `
+            <div class="ingredient__item">${ingredient.ingredient} </br> ${ingredient.measure}</div>
+        `;
+    });
+
+    return htmlTemplate;
+}
+
 function displayRecipe(recipe) {
     modal.classList.add('modal--active');
     const modalTitle = document.querySelector('.modal__header');
-    const ingredients = document.querySelector('.ingredient__list');
-    const preparation = document.createElement('p');
+    const modalPreparation = document.querySelector('.instructions');
+    const modalImg = document.querySelector('.modal__img');
+    const ingredientsList = document.querySelector('.ingredient__list');
+
+    modalTitle.innerHTML = `${recipe.recipe[0].strDrink}`;
+    modalPreparation.innerHTML = `${recipe.recipe[0].strInstructions}`;
+    modalImg.src = `${recipe.recipe[0].strDrinkThumb}/preview`;
+
+    ingredientsList.innerHTML = this.displayIngredients(recipe);
 }
 
 function clearResults() {
