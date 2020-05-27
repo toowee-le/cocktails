@@ -94,7 +94,7 @@ input[type=submit]:hover,
 .app {
     width: 70%;
     max-width: 500px;
-    margin: 30px auto 0;
+    margin: 30px auto 30px;
     padding: 1em;
     border-radius: 10px;
     background: rgba(235,235,235,0.7);
