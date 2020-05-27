@@ -132,7 +132,7 @@ function displayIngredients(recipe) {
 
     ingredients.forEach(ingredient => {
         htmlTemplate+= `
-            <div class="ingredient__item">${ingredient.ingredient} </br> ${ingredient.measure}</div>
+            <div class="ingredient__item">${ingredient.measure} </br> ${ingredient.ingredient}</div>
         `;
     });
 
