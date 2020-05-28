@@ -84,7 +84,7 @@ input[type=submit]:hover,
     background: var(--hover-color);
 }
 
-.filter-container {
+.category-container {
     display: flex;
     justify-content: space-evenly;
     margin: 1em 0;
@@ -218,8 +218,8 @@ input[type=submit]:hover,
 }
 
 /* ---- Utilities ---- */
-.alcohol,
-.non-alcohol,
+.alcoholic,
+.non-alcoholic,
 .random-drink {
     display: flex;
     align-items: center;
@@ -234,8 +234,8 @@ input[type=submit]:hover,
     cursor: pointer;
 }
 
-.alcohol:hover,
-.non-alcohol:hover,
+.alcoholic:hover,
+.non-alcoholic:hover,
 .random-drink:hover {
     background: var(--hover-color);
 }

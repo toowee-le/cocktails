@@ -1,11 +1,12 @@
 const baseURL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const recipeURL = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+const categoryURL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=';
 const cocktailContainer = document.getElementById('cocktailContainer');
 const modal = document.getElementById('modal');
 
 eventListeners();
 
-function performAction(e) {
+function searchCocktails(e) {
     e.preventDefault();
 
     const form = document.forms["search"]["ingredient"].value;
@@ -14,7 +15,7 @@ function performAction(e) {
         return false;
     } else {
         const ingredient = document.getElementById('ingredient').value;
-        getCocktail(ingredient)
+        getCocktailByIngredient(ingredient)
         .then(results => {
             for (drink of results.drinks) {
                 createCocktailCard();
@@ -28,16 +29,27 @@ function eventDelegation(e) {
     e.preventDefault();
 
     if(e.target.id == 'getRecipe') {
-        getRecipe(e.target.dataset.id)
+        getRecipeById(e.target.dataset.id)
         .then(recipe => {
             displayRecipe(recipe);
             displayIngredients(recipe);
         })
     }
+
+    if(e.target.id == 'Alcoholic' || e.target.id == 'Non_Alcoholic') {
+        getDrinksByAlcohol(e.target.dataset.category)
+        .then(results => {
+            for (drink of results.drinks) {
+                createCocktailCard(drink);
+            }
+        })
+
+        clearResults();
+    }
 }
 
 // Fetch cocktail by ingredient from The CocktailDB API
-const getCocktail = async (ingredient) => {
+const getCocktailByIngredient = async (ingredient) => {
     let ingredientResponse = await fetch(baseURL+ingredient);
     let ingredientData = await ingredientResponse.json();
     let drink = ingredientData.drinks;
@@ -51,14 +63,27 @@ const getCocktail = async (ingredient) => {
     }
 }
 
+// Fetch drinks by alcohol from The CocktailDB API
+const getDrinksByAlcohol = async (type) => {
+    let res = await fetch(categoryURL+type);
+    let json = await res.json();
+    let drinks = json.drinks;
+    try {
+        console.log(drinks);
+        return {
+            drinks: drinks
+        }
+    } catch (error) {
+        console.log(`No drinks available`);
+        console.log("Error:", error);
+    }
+}
+
 // Fetch single recipe from The CocktailDB API
-const getRecipe = async (id) => {
+const getRecipeById = async (id) => {
     let recipeResponse = await fetch (recipeURL+id);
     let recipeData = await recipeResponse.json();
     let recipes = recipeData.drinks;
-    //let object = recipeData.drinks[0]['strIngredient1']
-    console.log(recipeData);
-    //console.log(object);
     try {
         return {
             recipe: recipes
@@ -166,11 +191,11 @@ function clearModal() {
 }
 
 function eventListeners() {
-    document.getElementById('search').addEventListener('click', performAction);
+    document.getElementById('search').addEventListener('click', searchCocktails);
 
     document.getElementById('modalClose').addEventListener('click', clearModal);
 
-    if(cocktailContainer) {
-        cocktailContainer.addEventListener('click', eventDelegation);
+    if(document.body) {
+        document.body.addEventListener('click', eventDelegation);
     }
 }
