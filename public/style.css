@@ -54,6 +54,14 @@ h3 {
     padding-bottom: .3em;
 }
 
+a {
+    color: var(--text-color);
+}
+
+a:hover {
+    color: var(--hover-color);
+}
+
 /* ---- Layout ---- */
 form {
     display: flex;
@@ -83,6 +91,15 @@ input[type=submit] {
 input[type=submit]:hover,
 .modal__close:hover {
     background: var(--hover-color);
+}
+
+.menu {
+    padding-bottom: 1em;
+    text-align: right;
+}
+
+.menu a {
+    padding-left: .3em;
 }
 
 .category-container {
