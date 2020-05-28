@@ -43,6 +43,7 @@ h3 {
 .modal__header {
     text-align: center;
     letter-spacing: 2px;
+    display: block;
 }
 
 .modal__preparation,
