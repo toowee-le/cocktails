@@ -163,6 +163,8 @@ getRandomDrink();
 
 // Update UI
 function createCocktailCard() {
+    const title = document.getElementById('results');
+    title.style.display = 'block';
     const cocktailCard = document.createElement('div');
     cocktailCard.classList.add('cocktail-card');
     const cocktail = drink.strDrink;
