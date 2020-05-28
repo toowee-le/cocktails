@@ -80,11 +80,13 @@ input[type=submit] {
 }
 
 input[type=text] {
-    width: 90%;
+    width: 100%;
+    margin-right: .6em;
+    overflow: hidden;
 }
 
 input[type=submit] {
-    width: 8%;
+    float: right;
     cursor: pointer;
     transition: .3s ease;
 }
@@ -111,7 +113,7 @@ input[type=submit]:hover,
 
 /* Cocktail Container */
 .app {
-    width: 70%;
+    width: 80%;
     max-width: 500px;
     margin: 30px auto 30px;
     padding: 1em;
@@ -294,4 +296,83 @@ input[type=submit]:hover,
 .get-recipe__btn:hover,
 .favourite__btn:hover {
     background: var(--hover-color);
+}
+
+@media (max-width: 640px) {
+    .alcoholic,
+    .non-alcoholic,
+    .random-drink {
+        width: 120px;
+        justify-content: space-between;
+    }
+
+    .cocktail-container {
+        grid-template-columns: 1fr;
+    }
+
+    .cocktail-card {
+        width: 100%;
+    }
+
+    .cocktail-img {
+        width: 100%;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .alcoholic,
+    .non-alcoholic,
+    .random-drink {
+        flex-direction: column;
+        width: 110px;
+    }
+
+    .alcohol__icon,
+    .non-alcohol__icon,
+    .random-drink__icon {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 470px) {
+    .alcoholic,
+    .non-alcoholic,
+    .random-drink {
+        width: 90px;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 392px) {
+    .alcoholic,
+    .non-alcoholic,
+    .random-drink {
+        font-size: .6em;
+        width:  72px;
+    }
+}
+
+@media (max-width: 320px) {
+    .category-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .alcoholic,
+    .non-alcoholic,
+    .random-drink {
+        width:  100px;
+        margin-bottom: .5em;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
 }
