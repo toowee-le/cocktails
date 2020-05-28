@@ -41,9 +41,33 @@ function eventDelegation(e) {
         .then(results => {
             for (drink of results.drinks) {
                 createCocktailCard(drink);
-            }
-        })
+            };
+        });
 
+        clearResults();
+    }
+
+    if(e.target.id == 'random') {
+        getRandomDrink()
+        .then(drink => {
+            drink.randomDrink.forEach(item => {
+                console.log(item.idDrink);
+                const cocktailCard = document.createElement('div');
+                cocktailCard.classList.add('cocktail-card');
+                const cocktail = item.strDrink;
+                const imgURL = item.strDrinkThumb;
+                const cardInnerHTML = `
+                    <img src="${imgURL}/preview" alt="Cocktail Thumbnail" class="cocktail-img">
+                    <h3>${cocktail}</h3>
+                    <div class="btn-container">
+                        <button class="get-recipe__btn" id="getRecipe" data-id="${item.idDrink}">See Recipe</button>
+                        <button class="favourite__btn" data-id="${item.idDrink}"><i class="far fa-heart"></i></button>
+                    </div>`;
+
+                cocktailCard.innerHTML = cardInnerHTML;
+                cocktailContainer.appendChild(cocktailCard).classList.add('stretch');
+            })
+        });
         clearResults();
     }
 }
@@ -67,11 +91,10 @@ const getCocktailByIngredient = async (ingredient) => {
 const getDrinksByAlcohol = async (type) => {
     let res = await fetch(categoryURL+type);
     let json = await res.json();
-    let drinks = json.drinks;
+    let drink = json.drinks;
     try {
-        console.log(drinks);
         return {
-            drinks: drinks
+            drinks: drink
         }
     } catch (error) {
         console.log(`No drinks available`);
@@ -89,10 +112,27 @@ const getRecipeById = async (id) => {
             recipe: recipes
         }
     } catch (error) {
-        console.log(`No recipe found for ${id}`)
-        console.log("Error:", error)
+        console.log(`No recipe found for ${id}`);
+        console.log("Error:", error);
     }
 }
+
+// Fetch a random drink from The CocktailDB API
+const getRandomDrink = async () => {
+    let randomResponse = await fetch ('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+    let randomData = await randomResponse.json();
+    let drink = randomData.drinks;
+    try {
+        return {
+            randomDrink: drink
+        }
+    } catch (error) {
+        console.log('No random drink available');
+        console.log("Error:", error);
+    }
+}
+
+getRandomDrink();
 
 // const getCocktail = async (baseURL, ingredient) => {
 //     const response = await fetch(baseURL+ingredient);
