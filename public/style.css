@@ -111,7 +111,7 @@ input[type=submit]:hover,
 
 /* Cocktail Container */
 .app {
-    width: 70%;
+    width: 80%;
     max-width: 500px;
     margin: 30px auto 30px;
     padding: 1em;
@@ -294,4 +294,22 @@ input[type=submit]:hover,
 .get-recipe__btn:hover,
 .favourite__btn:hover {
     background: var(--hover-color);
+}
+
+@media (max-width: 640px) {
+    .cocktail-container {
+        grid-template-columns: 1fr;
+    }
+
+    .cocktail-card {
+        width: 100%;
+    }
+
+    .cocktail-img {
+        width: 100%;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
 }
