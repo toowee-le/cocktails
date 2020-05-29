@@ -132,8 +132,6 @@ const getRandomDrink = async () => {
     }
 }
 
-getRandomDrink();
-
 // const getCocktail = async (baseURL, ingredient) => {
 //     const response = await fetch(baseURL+ingredient);
 //     const data = await response.json();
