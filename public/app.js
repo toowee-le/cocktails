@@ -60,7 +60,6 @@ function eventDelegation(e) {
         getRandomDrink()
         .then(drink => {
             drink.randomDrink.forEach(item => {
-                console.log(item.idDrink);
                 const cocktailCard = document.createElement('div');
                 cocktailCard.classList.add('cocktail-card');
                 const cocktail = item.strDrink;
@@ -140,33 +139,6 @@ const getRandomDrink = async () => {
         console.log("Error:", error);
     }
 }
-
-// const getCocktail = async (baseURL, ingredient) => {
-//     const response = await fetch(baseURL+ingredient);
-//     const data = await response.json();
-//     const drinks = data.drinks;
-//     try {
-//         console.log(drinks);
-//         for (drink of drinks) {
-//             createCocktailCard();
-//             getRecipe(drink.idDrink);
-//         }
-//         const postData = { drinks };
-//         const options = {
-//             method: 'POST',
-//             credentials: 'same-origin',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(postData)
-//         };
-//         const response = await fetch('/api/cocktails', options);
-//         const getData = await response.json();
-//         console.log(getData);
-//     } catch (error) {
-//         console.log("error", error);
-//     }
-// }
 
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
