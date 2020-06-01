@@ -39,11 +39,9 @@ function eventDelegation(e) {
     if(e.target.id == 'favorite') {
         getRecipeById(e.target.dataset.id)
         .then(data => {
-            console.log(data.recipe[0]);
-
             const { idDrink, strDrink, strDrinkThumb } = data.recipe[0];
-
             postData('/api/favorites', {id: idDrink, drink: strDrink, image: strDrinkThumb})
+            .then(results => console.log(results));
         });
     }
 
@@ -181,7 +179,6 @@ const postData = async (url = '', data = {}) => {
     });
     try {
         const getData = await response.json();
-        console.log(getData);
         return getData;
     } catch (error) {
         console.log("Error:", error);
