@@ -15,24 +15,22 @@ app.use(cors());
 const appData = new Datastore('favorites.db');
 appData.loadDatabase();
 
-//const appData = [];
-
-// Create GET route
-// app.get('/api', (req, res) => {
-//     appData.find({}, (err, data) => {
-//         if (err) {
-//             res.end();
-//             return;
-//         }
-//         res.json(data);
-//     })
-// });
+// Set GET route
+app.get('/api/favorites', (req, res) => {
+    appData.find({}, (err, data) => {
+        if(err) {
+            res.end();
+            return;
+        }
+        res.json(data);
+    });
+});
 
 // Set POST route/endpoint
 app.post('/api/favorites', (req, res) => {
     const data = req.body;
     appData.insert(data);
-    console.log(appData);
+    console.log(data);
     res.json(data);
 })
 
