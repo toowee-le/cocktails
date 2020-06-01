@@ -6,7 +6,7 @@ const modal = document.getElementById('modal');
 
 eventListeners();
 
-function searchCocktails(e) {
+function performAction(e) {
     e.preventDefault();
 
     const form = document.forms["search"]["ingredient"].value;
@@ -19,11 +19,11 @@ function searchCocktails(e) {
         .then(results => {
             for (drink of results.drinks) {
                 createCocktailCard();
-            }
-        })
+            };
+        });
         clearResults();
-    }
-}
+    };
+};
 
 function eventDelegation(e) {
     e.preventDefault();
@@ -33,7 +33,18 @@ function eventDelegation(e) {
         .then(recipe => {
             displayRecipe(recipe);
             displayIngredients(recipe);
-        })
+        });
+    };
+
+    if(e.target.id == 'favorite') {
+        getRecipeById(e.target.dataset.id)
+        .then(data => {
+            console.log(data.recipe[0]);
+
+            const { idDrink, strDrink, strDrinkThumb } = data.recipe[0];
+
+            postData('/api/favorites', {id: idDrink, drink: strDrink, image: strDrinkThumb})
+        });
     }
 
     if(e.target.id == 'Alcoholic' || e.target.id == 'Non_Alcoholic') {
@@ -61,16 +72,16 @@ function eventDelegation(e) {
                     <h3>${cocktail}</h3>
                     <div class="btn-container">
                         <button class="get-recipe__btn" id="getRecipe" data-id="${item.idDrink}">See Recipe</button>
-                        <button class="favourite__btn" data-id="${item.idDrink}"><i class="far fa-heart"></i></button>
+                        <button class="favourite__btn" id="favorite" data-id="${item.idDrink}"><i class="far fa-heart"></i></button>
                     </div>`;
 
                 cocktailCard.innerHTML = cardInnerHTML;
                 cocktailContainer.appendChild(cocktailCard).classList.add('stretch');
-            })
+            });
         });
         clearResults();
-    }
-}
+    };
+};
 
 // Fetch cocktail by ingredient from The CocktailDB API
 const getCocktailByIngredient = async (ingredient) => {
@@ -159,6 +170,24 @@ const getRandomDrink = async () => {
 //     }
 // }
 
+const postData = async (url = '', data = {}) => {
+    const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    try {
+        const getData = await response.json();
+        console.log(getData);
+        return getData;
+    } catch (error) {
+        console.log("Error:", error);
+    };
+};
+
 // Update UI
 function createCocktailCard() {
     const title = document.getElementById('results');
@@ -172,7 +201,7 @@ function createCocktailCard() {
         <h3>${cocktail}</h3>
         <div class="btn-container">
             <button class="get-recipe__btn" id="getRecipe" data-id="${drink.idDrink}">See Recipe</button>
-            <button class="favourite__btn" data-id="${drink.idDrink}"><i class="far fa-heart"></i></button>
+            <button class="favourite__btn" id="favorite" data-id="${drink.idDrink}"><i class="far fa-heart"></i></button>
         </div>
     `;
 
@@ -231,7 +260,7 @@ function clearModal() {
 }
 
 function eventListeners() {
-    document.getElementById('search').addEventListener('click', searchCocktails);
+    document.getElementById('search').addEventListener('click', performAction);
 
     document.getElementById('modalClose').addEventListener('click', clearModal);
 
