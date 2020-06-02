@@ -2,7 +2,6 @@ const getData = async () => {
     const response = await fetch('/api/favorites');
     const data = await response.json();
 
-    console.log(data);
     for (item of data) {
         displayFavorites(item);
     }
@@ -24,7 +23,7 @@ function displayFavorites() {
             <h3 class="favorite__drink-name">${drink}</h3>
             <div class="btn-container">
                 <button class="get-recipe__btn" id="getRecipe" data-id="${id}">See Recipe</button>
-                <button class="remove__btn" id="favorite">Remove</button>
+                <button class="remove__btn" id="favorite" data-id="${id}">Remove</button>
             </div>
         </div>
     `;
