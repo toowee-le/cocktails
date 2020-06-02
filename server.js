@@ -1,8 +1,8 @@
 // Express to run server and routes
 const express = require('express');
-const Datastore = require('nedb');
-
 const app = express();
+
+const Datastore = require('nedb');
 
 /* Dependencies */
 const bodyParser = require('body-parser');

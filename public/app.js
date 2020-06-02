@@ -41,7 +41,9 @@ function eventDelegation(e) {
         .then(data => {
             const { idDrink, strDrink, strDrinkThumb } = data.recipe[0];
             postData('/api/favorites', {id: idDrink, drink: strDrink, image: strDrinkThumb})
-            .then(results => console.log(results));
+            .then(results => {
+                console.log(results);
+            });
         });
     }
 
